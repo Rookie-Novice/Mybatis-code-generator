@@ -1,6 +1,5 @@
 ### 开发背景
-- 不想重复造轮子
-- 普渡重复造轮子的coder
+- 由于人人框架官方的生成代码工具只生成mp的，但是公司还是采用的mybatis
 - 基于人人框架的生成代码工具修改(官方链接：https://gitee.com/renrenio/renren-generator)
 
 ### 注意事项
