@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="${package}.${moduleName}.dao.${className}Dao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="${package}.${moduleName}.entity.${className}Entity" id="${classname}Map">
+        #foreach($column in $columns)
+            <result property="${column.attrname}" column="${column.columnName}"/>
+        #end
+    </resultMap>
+    
+    <sql id="bashWhere">
+        <where>
+            #foreach($column in $columns)
+                <if test="${column.attrname} != null">and ${column.columnName} = #{${column.attrname}}</if>
+            #end
+        </where> 
+    </sql>
+
+    <select id="selectList" resultType="${package}.${moduleName}.entity.${className}Entity">
+        select #foreach($column in $columns)${column.columnName}#if(!$foreach.last),#end#end from ${tableName}
+        <include refid="bashWhere"/>
+    </select>
+
+
+    <select id="get${className}ByPrimaryKey" resultType="${package}.${moduleName}.entity.${className}Entity">
+        select #foreach($column in $columns)${column.columnName}#if(!$foreach.last),#end#end from ${tableName}
+        where ${pk.columnName} = #{${pk.attrname}}
+    </select>
+    
+    <select id="count" resultType="int">
+        select count(1) from ${tableName}
+        <include refid="bashWhere"></include>
+    </select>
+    
+    
+    <delete id="deleteByPrimaryKey" >
+        delete from ${tableName} where ${pk.columnName} = #{${pk.attrname}}
+    </delete>
+    
+    
+    <delete id="batchDelete">
+        delete from ${tableName} where ${pk.columnName} in ${${pk.attrname}s}
+    </delete>
+    
+    
+    <insert id="save" parameterType="${package}.${moduleName}.entity.${className}Entity">
+        insert into ${tableName}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            #foreach($column in $columns)
+            <if test="${column.attrname} != null">
+                ${column.columnName}#if(!$foreach.last),#end
+            </if>
+            #end
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #foreach($column in $columns)
+                <if test="${column.attrname} != null">
+                #{${column.attrname}}#if(!$foreach.last),#end
+                </if>
+            #end
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="${package}.${moduleName}.entity.${className}Entity">
+        update ${tableName}
+        <set>
+        #foreach($column in $columns)
+            <if test="${column.attrname} != null">#{${column.attrname}}#if(!$foreach.last),#end</if>
+        #end
+        </set>
+        where ${pk.columnName} = #{${pk.attrname}}
+    </update>
+
+
+</mapper>

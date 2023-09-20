@@ -1,0 +1,44 @@
+package ${package}.${moduleName}.dao;
+
+import ${package}.${moduleName}.entity.${className}Entity;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Mapper
+@Repository
+public interface ${className}Dao{
+
+
+    List<${className}Entity> selectList(Map<String,Object> params);
+
+
+    ${className}Entity get${className}ByPrimaryKey(@Param("${pk.attrname}") Long ${pk.attrname});
+
+
+    int count(Map<String,Object> params);
+
+
+    int deleteByPrimaryKey(@Param("${pk.attrname}") Long ${pk.attrname});
+
+
+    int batchDelete(@Param("${pk.attrname}s")String ${pk.attrname}s);
+
+
+    int save(${className}Entity ${classname});
+
+
+    int update(${className}Entity ${classname});
+
+
+}

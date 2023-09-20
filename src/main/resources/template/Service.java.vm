@@ -1,0 +1,39 @@
+package ${package}.${moduleName}.service;
+
+import ${package}.${moduleName}.entity.${className}Entity;
+
+import java.util.Map;
+import java.util.List;
+
+
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public interface ${className}Service{
+
+    List<${className}Entity> selectList(Map<String,Object> params);
+
+
+    ${className}Entity get${className}ByPrimaryKey(Long ${pk.attrname});
+
+
+    int count(Map<String,Object> params);
+
+
+    int deleteByPrimaryKey(Long ${pk.attrname});
+
+
+    int batchDelete(String ${pk.attrname}s);
+
+
+    int save(${className}Entity ${classname});
+
+
+    int update(${className}Entity ${classname});
+}
+
