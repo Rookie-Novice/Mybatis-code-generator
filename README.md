@@ -1,5 +1,4 @@
 ### 开发背景
-- 公司转型做自研产品
 - 不想重复造轮子
 - 普渡重复造轮子的coder
 - 基于人人框架的生成代码工具修改(官方链接：https://gitee.com/renrenio/renren-generator)
